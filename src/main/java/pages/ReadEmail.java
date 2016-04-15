@@ -24,8 +24,11 @@ public class ReadEmail {
 		PageFactory.initElements(this.driver, this);
 	}
 
+	//TODO 
 	public void sendEmailToSpam() {
 		logger.info("email marked as spam");
+		//WebDriverWait wait=new WebDriverWait(driver,10);
+		//wait.until(ExpectedConditions.elementToBeClickable(toSpamButton));
 		optionsMenu.click();
 		toSpamButton.click();
 	}

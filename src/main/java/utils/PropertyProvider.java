@@ -14,7 +14,7 @@ public class PropertyProvider {
 	private static String path = "src\\main\\resources\\config\\config.properties";
 
 	private PropertyProvider() {
-		path=FilenameUtils.separatorsToSystem(new File("").getAbsolutePath()+"\\"+path);
+		path = FilenameUtils.separatorsToSystem(new File("").getAbsolutePath() + "\\" + path);
 		loadProperties(path);
 	}
 
