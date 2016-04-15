@@ -1,5 +1,5 @@
 package utils;
 
-public enum Browser {
+public enum BrowserType {
     FIREFOX,CHROME;
 }

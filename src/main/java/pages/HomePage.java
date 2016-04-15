@@ -45,7 +45,7 @@ public class HomePage {
 		return new LoginPage(driver);
 	}
 
-	public NewEmail createEmail() {
+	public NewEmail openNewEmail() {
 		logger.info("Writing");
 		newEmailButton.click();
 		return new NewEmail(driver);
@@ -60,20 +60,10 @@ public class HomePage {
 	}
 
 	public ReadEmail findEmailByTopic(String topicLine) {
-		searchBar.sendKeys(topicLine);
-		searchButton.click();
 		WebDriverWait wait = new WebDriverWait(driver, 10);
-		WebElement el = driver.findElement(By.xpath("//span//b[contains(text(),'" + topicLine + "')]/.."));
-		wait.until(ExpectedConditions.elementToBeClickable(el));
-		el.click();
-
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		toSpamButton.click();
+		WebElement topic = driver.findElement(By.xpath("//span//b[contains(text(),'" + topicLine + "')]/.."));
+		wait.until(ExpectedConditions.elementToBeClickable(topic));
+		topic.click();
 		return new ReadEmail(driver);
 	}
 

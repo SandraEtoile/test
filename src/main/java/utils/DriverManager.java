@@ -12,12 +12,10 @@ public final class DriverManager {
 
 	private static WebDriver driver;
 	private static Logger logger = LogManager.getRootLogger();
-
-	private DriverManager() {
-	}
+	private static String browserType="browser";
 
 	private static void initDriver() {
-		Browser browser = Browser.valueOf(PropertyProvider.getProperty("browser"));
+		BrowserType browser = BrowserType.valueOf(PropertyProvider.getProperty(browserType));
 		switch (browser) {
 		case CHROME:
 			driver = new ChromeDriver();
@@ -38,7 +36,7 @@ public final class DriverManager {
 	
 	public static void closeDriver(){
 		driver.quit();
-		driver=null;
+		driver = null;
 		logger.info("Browser closed");
 	}
 	

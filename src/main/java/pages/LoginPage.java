@@ -6,13 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.DriverManager;
 import utils.UserGenerator;
 
 public class LoginPage {
 
 	private Logger logger = LogManager.getRootLogger();
-
+	private WebDriver driver;
+	
 	@FindBy(id = "Email")
 	private WebElement email;
 
@@ -31,18 +31,17 @@ public class LoginPage {
 	@FindBy(id = "account-chooser-add-account")
 	private WebElement addAccountButton;
 
-	private WebDriver driver = DriverManager.getDriver();
 
 	public LoginPage(WebDriver driver) {
+		this.driver=driver;
 		PageFactory.initElements(this.driver, this);
 	}
 
-	public HomePage login(int userNumber) {
-		UserGenerator us = new UserGenerator();
+	public HomePage login(String userName) {
 		logger.info("Loggin");
-		email.sendKeys(us.getUser(userNumber).getEmail());
+		email.sendKeys(UserGenerator.getUserFromMap(userName).getEmail());
 		nextButton.click();
-		password.sendKeys(us.getUser(userNumber).getPassword());
+		password.sendKeys(UserGenerator.getUserFromMap(userName).getPassword());
 		signInButton.click();
 		logger.info("Login finished");
 		return new HomePage(driver);

@@ -6,14 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utils.DriverManager;
 import utils.TopicGenerator;
 import utils.UserGenerator;
 
 public class NewEmail {
 
 	private Logger logger = LogManager.getRootLogger();
-	private WebDriver driver = DriverManager.getDriver();
+	private WebDriver driver;
 
 	@FindBy(xpath = "//textarea[@name='to']")
 	private WebElement toWho;
@@ -32,16 +31,15 @@ public class NewEmail {
 		PageFactory.initElements(this.driver, this);
 	}
 
-	public String write(int i) {
-		UserGenerator ug = new UserGenerator();
+	public String fillInNewEmail(String userName, String bodyWords) {
 		TopicGenerator tp = new TopicGenerator();
 		tp.generateTopic();
 		String topicLine = TopicGenerator.getTopics();
 		logger.info("Loggin");
 		toWho.click();
-		toWho.sendKeys(ug.getUser(i).getEmail());
+		toWho.sendKeys(UserGenerator.getUserFromMap(userName).getEmail());
 		topic.sendKeys(topicLine);
-		body.sendKeys("hello");
+		body.sendKeys(bodyWords);
 		sendButton.click();
 		return topicLine;
 	}
