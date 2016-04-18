@@ -33,6 +33,12 @@ public class HomePage {
 
 	@FindBy(xpath = "//div[@class='asa']")
 	private WebElement toSpamButton;
+	
+	@FindBy(xpath = "//div[@dir='ltr']")
+	private WebElement emailCheckbox;
+	
+	@FindBy(xpath= "//div[@act='9']/div")
+    private WebElement markSpam;
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -56,15 +62,15 @@ public class HomePage {
 		searchBar.sendKeys("in:spam");
 		searchButton.click();
 		return new Spam(driver);
-
 	}
 
-	public ReadEmail findEmailByTopic(String topicLine) {
+	public void sendLetterToSpam(String topicLine) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		WebElement topic = driver.findElement(By.xpath("//span//b[contains(text(),'" + topicLine + "')]/.."));
 		wait.until(ExpectedConditions.elementToBeClickable(topic));
-		topic.click();
-		return new ReadEmail(driver);
+		emailCheckbox.click();
+		markSpam.click();
 	}
+	
 
 }

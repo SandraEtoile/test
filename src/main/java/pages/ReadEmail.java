@@ -18,19 +18,14 @@ public class ReadEmail {
 	
 	@FindBy(xpath = "//div[@class='cj' AND @act='9']")
 	private WebElement toSpamButton;
+	
 
+	
 	public ReadEmail(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(this.driver, this);
 	}
 
-	//TODO 
-	public void sendEmailToSpam() {
-		logger.info("email marked as spam");
-		//WebDriverWait wait=new WebDriverWait(driver,10);
-		//wait.until(ExpectedConditions.elementToBeClickable(toSpamButton));
-		optionsMenu.click();
-		toSpamButton.click();
-	}
+
 
 }

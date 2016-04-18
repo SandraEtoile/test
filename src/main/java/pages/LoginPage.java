@@ -52,5 +52,10 @@ public class LoginPage {
 		addAccountButton.click();
 		return new LoginPage(driver);
 	}
+	
+	public LoginPage logoutFromAccountSecondTime(){
+		addAccountButton.click();
+		return new LoginPage(driver);
+	}
 
 }

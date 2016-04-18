@@ -31,7 +31,7 @@ public class NewEmail {
 		PageFactory.initElements(this.driver, this);
 	}
 
-	public String fillInNewEmail(String userName, String bodyWords) {
+	public String fillInAndSendNewEmail(String userName, String bodyWords) {
 		TopicGenerator tp = new TopicGenerator();
 		tp.generateTopic();
 		String topicLine = TopicGenerator.getTopics();
