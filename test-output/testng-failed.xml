@@ -5,7 +5,7 @@
     <classes>
       <class name="test.Example">
         <methods>
-          <include name="test"/>
+          <include name="testForward"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- test.Example -->

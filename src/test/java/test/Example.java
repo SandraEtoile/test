@@ -9,6 +9,7 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.NewEmail;
 import pages.ReadEmail;
+import pages.SettingsPage;
 import pages.Spam;
 import utils.DriverManager;
 import utils.PropertyProvider;
@@ -24,17 +25,18 @@ public class Example {
 	public void setUp() {
 		driver = DriverManager.getDriver();
 		driver.get(gmail);
+		UserGenerator.userGenerate("user1");
+		UserGenerator.userGenerate("user2");
+		UserGenerator.userGenerate("user3");
 	}
 
-	@Test
-	public void test() {
+	@Test(enabled=false)
+	public void testSpam() {
 		// login u1
 		LoginPage page = new LoginPage(driver);
-		UserGenerator.userGenerate("user1");
 		HomePage home = page.login("user1");
 		// send email to u2
 		NewEmail email = home.openNewEmail();
-		UserGenerator.userGenerate("user2");
 		String topic = email.fillInAndSendNewEmail("user2", bodyEmail);
 		// logout u1
 		home.logout();
@@ -60,10 +62,18 @@ public class Example {
 		Spam spam= home.goToSpam();
 		// find email
 		Assert.assertTrue(spam.findEmailInSpam(topicRepeat));
-
 	}
+	
+	@Test
+	public void testForward(){
+		LoginPage page = new LoginPage(driver);
+		HomePage home = page.login("user2");
+		SettingsPage settings=home.goToSettingsPage();
+	}
+	
+	
 
-	// @AfterTest
+	//@AfterTest
 	/// public void tearDown() {
 	// DriverManager.closeDriver();
 	// }

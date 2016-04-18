@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class HomePage {
 
 	private Logger logger = LogManager.getRootLogger();
@@ -33,12 +32,18 @@ public class HomePage {
 
 	@FindBy(xpath = "//div[@class='asa']")
 	private WebElement toSpamButton;
-	
+
 	@FindBy(xpath = "//div[@dir='ltr']")
 	private WebElement emailCheckbox;
-	
-	@FindBy(xpath= "//div[@act='9']/div")
-    private WebElement markSpam;
+
+	@FindBy(xpath = "//div[@act='9']/div")
+	private WebElement markSpam;
+
+	@FindBy(xpath = "//div[@gh='s']/div/div[2]")
+	private WebElement settingsButton;
+
+	@FindBy(xpath = "(//div[@class='SK AX']/div)[1]")
+	private WebElement settingsFromDropDownMenu;
 
 	public HomePage(WebDriver driver) {
 		this.driver = driver;
@@ -71,6 +76,11 @@ public class HomePage {
 		emailCheckbox.click();
 		markSpam.click();
 	}
-	
+
+	public SettingsPage goToSettingsPage() {
+		settingsButton.click();
+		settingsFromDropDownMenu.click();
+		return new SettingsPage(driver);
+	}
 
 }
